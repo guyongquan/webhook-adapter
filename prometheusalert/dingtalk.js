@@ -1,3 +1,4 @@
+var CryptoJS = require("crypto-js");
 exports.template = function(body) {
     //钉钉群机器人 webhook api 文档 https://ding-doc.dingtalk.com/doc#/serverapi2/qf2nxq
     var alerts = body.alerts;
@@ -17,4 +18,18 @@ exports.template = function(body) {
             text: content
         }
     }
+}
+
+exports.signUrl = function(strurl) {
+    var url = new URL(strurl);
+    if(!url.hash.startsWith("#")) {
+        return strurl;
+    }
+    var secret = url.hash.substr(1);
+    var timestamp = new Date().getTime();
+    var stringToSign = `${timestamp}\n${secret}`;
+    var hash = CryptoJS.HmacSHA256(stringToSign, secret);
+    var hashInBase64 = CryptoJS.enc.Base64.stringify(hash);
+    url.hash = "";
+    return `${url.toString()}&timestamp=${timestamp}&sign=${encodeURI(hashInBase64)}`;
 }
