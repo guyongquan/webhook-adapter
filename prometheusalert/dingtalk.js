@@ -31,5 +31,5 @@ exports.signUrl = function(strurl) {
     var hash = CryptoJS.HmacSHA256(stringToSign, secret);
     var hashInBase64 = CryptoJS.enc.Base64.stringify(hash);
     url.hash = "";
-    return `${url.toString()}&timestamp=${timestamp}&sign=${encodeURI(hashInBase64)}`;
+    return `${url.toString()}&timestamp=${timestamp}&sign=${encodeURIComponent(hashInBase64)}`;
 }
