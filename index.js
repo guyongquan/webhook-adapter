@@ -36,7 +36,9 @@ settings.forEach(
                 if (!pattern.test(req.url)) {
                     return next();
                 }
-                fetch(e.signUrl(e.to),
+                var to = e.signUrl(e.to);
+                console.debug(`${req.url}=>${to}`);
+                fetch(to,
                     {
                         method: "POST",
                         body: JSON.stringify(e.template(req.body)),
@@ -49,7 +51,7 @@ settings.forEach(
                     ).then(
                         text => console.debug(text)
                     ).catch(
-                        error => console.warn(error)
+                        error => console.warn(`${req.url}=>${to}:${error}`);
                     ).finally(
                         () => res.send("ok")
                     );
