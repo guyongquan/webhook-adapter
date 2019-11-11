@@ -51,7 +51,7 @@ settings.forEach(
                     ).then(
                         text => console.debug(text)
                     ).catch(
-                        error => console.warn(`${req.url}=>${to}:${error}`);
+                        error => console.warn(`${req.url}=>${to}:${error}`)
                     ).finally(
                         () => res.send("ok")
                     );
