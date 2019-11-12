@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "webhook-adapter-dpes": "./dockerbase"
+    "webhook-adapter-deps": "./dockerbase"
   },
   "devDependencies": {},
   "scripts": {
